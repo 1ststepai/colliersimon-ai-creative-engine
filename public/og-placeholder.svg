@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="AI Creative Engine spec prototype preview">
+  <rect width="1200" height="630" fill="#08090b"/>
+  <path d="M0 120h1200M0 240h1200M0 360h1200M0 480h1200M160 0v630M320 0v630M480 0v630M640 0v630M800 0v630M960 0v630" stroke="#f4f1e8" stroke-opacity=".08"/>
+  <rect x="80" y="80" width="1040" height="470" fill="#101216" stroke="#35ffbd" stroke-opacity=".45"/>
+  <text x="120" y="170" fill="#35ffbd" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">SPEC CANDIDATE PROTOTYPE</text>
+  <text x="120" y="300" fill="#f4f1e8" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="900">AI Creative Engine</text>
+  <text x="120" y="374" fill="#d6d6ce" font-family="Arial, Helvetica, sans-serif" font-size="36">Briefs to QA-ready AI production workflows</text>
+  <rect x="120" y="440" width="250" height="50" fill="#35ffbd"/>
+  <text x="145" y="474" fill="#04110d" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Evan Pancis</text>
+</svg>
