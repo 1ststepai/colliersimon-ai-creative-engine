@@ -5,9 +5,18 @@ import { PrototypeConsole } from "@/components/PrototypeConsole";
 import { Section } from "@/components/Section";
 
 const whyCards = [
-  "Creative teams do not need random AI outputs. They need controlled systems with context, constraints, and review gates.",
-  "Performance creative needs speed, variation, testing discipline, and brand consistency moving in the same direction.",
-  "A Creative Technologist turns ambiguity into repeatable workflows that teams can actually run, measure, and hand off."
+  {
+    title: "Random AI output is not a workflow.",
+    body: "AI only becomes useful when it is wrapped in context, constraints, QA, and handoff."
+  },
+  {
+    title: "Performance creative needs controlled speed.",
+    body: "Generate variants faster without losing brand judgment or testing discipline."
+  },
+  {
+    title: "The Creative Technologist builds the operating layer.",
+    body: "Briefs become inputs. Brand rules become context. Outputs become reviewable and traceable."
+  }
 ];
 
 const anchors = [
@@ -25,7 +34,7 @@ export default function Home() {
         <a className="brand-mark" href="#top" aria-label="AI Creative Engine home">
           ACE
         </a>
-        <nav>
+        <nav aria-label="Page sections">
           {anchors.map((anchor) => (
             <a key={anchor.href} href={anchor.href}>
               {anchor.label}
@@ -37,62 +46,96 @@ export default function Home() {
       <section id="top" className="hero-section" aria-labelledby="hero-title">
         <div className="hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">
-              Spec concept by Evan Pancis for Creative Technologist role consideration.
-            </p>
+            <p className="eyebrow">Spec concept by Evan Pancis</p>
             <h1 id="hero-title">AI Creative Engine</h1>
+            <p className="hero-positioning">
+              An AI-enabled production system for turning creative briefs into variant-ready,
+              QA-controlled campaign outputs.
+            </p>
             <p className="hero-subhead">
-              A spec prototype for turning creative briefs into repeatable, QA-ready AI production
-              workflows.
+              A role-inspired prototype for turning creative briefs into structured context, channel
+              variants, human QA, and production-ready handoff.
             </p>
             <div className="hero-actions" aria-label="Primary calls to action">
-              <a className="button button-primary" href="#workflow">
-                View Workflow System
+              <a className="button button-primary" href="#prototype">
+                View Prototype
               </a>
-              <a className="button button-secondary" href="#prototype">
-                View Prototype Interface
+              <a className="button button-secondary" href="#workflow">
+                See Workflow
               </a>
               <a className="button button-quiet" href="/concept-pdf.pdf">
-                Download Concept PDF
+                Download PDF
               </a>
             </div>
           </div>
 
-          <aside className="hero-art" aria-label="Spec prototype system snapshot">
-            <div className="system-card system-card-main">
-              <span>Campaign Input</span>
-              <strong>Creative brief parsed into reusable production context</strong>
+          <aside className="hero-art" aria-label="Campaign Variant Console preview">
+            <div className="hero-art-top">
+              <span>Campaign Variant Console</span>
+              <strong>Human approval required</strong>
             </div>
-            <div className="signal-row">
-              <span>Brand Voice</span>
-              <span>Channel Rules</span>
-              <span>QA Gates</span>
+            <div className="signal-map" aria-hidden="true">
+              <span />
+              <span />
+              <span />
             </div>
-            <div className="variant-stack" aria-hidden="true">
-              <div />
-              <div />
-              <div />
-              <div />
+            <div className="hero-preview-grid">
+              <div className="preview-panel preview-panel-large">
+                <span>Brief parsed</span>
+                <strong>5 channel families</strong>
+                <p>Paid Social / CTV / Programmatic / CRM / Creator Studio</p>
+              </div>
+              <div className="preview-panel">
+                <span>Brand Context</span>
+                <strong>Loaded</strong>
+              </div>
+              <div className="preview-panel">
+                <span>Claims Review</span>
+                <strong>Needs Legal</strong>
+              </div>
+              <div className="preview-panel">
+                <span>Auto-Publish</span>
+                <strong>Locked</strong>
+              </div>
             </div>
-            <div className="system-card">
-              <span>Ready for handoff</span>
-              <strong>Variants, rationale, risks, and production notes documented.</strong>
+            <div className="qa-strip" aria-label="QA progress 72 percent">
+              <div>
+                <span />
+              </div>
+              <strong>Handoff readiness 72%</strong>
+            </div>
+            <div className="context-chip-row" aria-label="Loaded context chips">
+              <span>Voice rules</span>
+              <span>Prompt v03</span>
+              <span>QA gates</span>
+              <span>Handoff packet</span>
             </div>
           </aside>
         </div>
       </section>
 
       <Section
+        id="prototype"
+        eyebrow="Prototype interface"
+        title="Campaign Variant Console"
+        intro="A believable internal tool surface for brief parsing, variant queues, QA gates, and handoff readiness."
+        featured
+      >
+        <PrototypeConsole />
+      </Section>
+
+      <Section
         id="why"
         eyebrow="Why this exists"
-        title="AI output is only useful when the system around it is useful."
-        intro="This candidate prototype is inspired by the role requirements: build AI-enabled workflows that help creative teams move faster without surrendering taste, brand judgment, or production discipline."
+        title="Useful AI needs an operating system."
+        intro="This candidate prototype frames AI as production infrastructure: fast, constrained, reviewable, and ready for handoff."
       >
         <div className="why-grid">
           {whyCards.map((card, index) => (
-            <article className="reason-card" key={card}>
+            <article className="reason-card" key={card.title}>
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <p>{card}</p>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
             </article>
           ))}
         </div>
@@ -101,26 +144,17 @@ export default function Home() {
       <Section
         id="workflow"
         eyebrow="The operating model"
-        title="A repeatable path from messy brief to production-ready creative variants."
-        intro="The engine treats AI as one layer in a controlled production system: context goes in, structured variants come out, and humans make the judgment calls that matter."
+        title="From brief to handoff in five controlled moves."
+        intro="Context goes in. Variants come out. Humans keep ownership of strategy, taste, and approval."
       >
         <Pipeline />
       </Section>
 
       <Section
-        id="prototype"
-        eyebrow="Prototype interface"
-        title="Campaign Variant Console"
-        intro="A static mockup of the internal tool surface a creative team could use to review context, generate channel-specific variants, track QA, and package handoff notes."
-      >
-        <PrototypeConsole />
-      </Section>
-
-      <Section
         id="guardrails"
         eyebrow="AI guardrails"
-        title="The system is built around judgment, not autopilot."
-        intro="The prototype makes the boundaries explicit so AI accelerates production without becoming an unmanaged publishing layer."
+        title="Judgment stays in the loop."
+        intro="Guardrails make the system faster without making it reckless."
       >
         <Guardrails />
       </Section>
@@ -128,8 +162,8 @@ export default function Home() {
       <Section
         id="modules"
         eyebrow="What I would prototype first"
-        title="Three modules that create immediate leverage for a performance creative team."
-        intro="Each module is intentionally small enough to build, test, document, and hand off while still proving the core operating model."
+        title="A practical roadmap for immediate leverage."
+        intro="Three buildable modules that prove the workflow without pretending the whole production system is finished."
       >
         <ModuleCards />
       </Section>
@@ -137,16 +171,16 @@ export default function Home() {
       <Section
         id="why-me"
         eyebrow="Why me"
-        title="I build the connective tissue between creative intent and working AI systems."
-        intro="At 1stStep.ai, my work has centered on practical AI workflow systems: prompts, context, scripts, APIs, internal tools, documentation, and handoff processes that help non-technical teams use AI with more confidence."
+        title="Why I'm a fit for this kind of work"
+        intro="At 1stStep.ai, I build the connective tissue between AI tools and real operating workflows: prompts, context, scripts, APIs, internal tools, documentation, and handoff systems."
       >
         <div className="proof-grid">
           {[
-            "Built AI workflow systems and internal tools for repeatable production tasks.",
-            "Created LLM-connected workflows using prompts, context, scripts, and APIs.",
-            "Designed documented handoff processes so prototypes can become team-ready systems.",
-            "Translated non-technical production needs into working tools and clear operating steps.",
-            "Kept a strong bias toward useful AI: measurable, reviewable, and grounded in real constraints."
+            "Built AI workflow systems and internal tools",
+            "Created LLM-connected workflows using prompts, context, scripts, and APIs",
+            "Designed documented handoff processes for non-technical users",
+            "Translated messy business needs into structured systems",
+            "Prioritized useful AI over AI theater"
           ].map((item) => (
             <div className="proof-item" key={item}>
               <span aria-hidden="true" />
@@ -154,6 +188,10 @@ export default function Home() {
             </div>
           ))}
         </div>
+        <p className="closing-statement">
+          I do not see AI as a replacement for creative judgment. I see it as infrastructure for
+          better creative operations.
+        </p>
       </Section>
 
       <footer className="site-footer">

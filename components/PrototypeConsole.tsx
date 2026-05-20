@@ -7,11 +7,18 @@ const channels = [
 ];
 
 const qaItems = [
-  ["Brand voice lock", "Passed"],
-  ["Source context present", "Passed"],
-  ["Claims reviewed", "Needs legal"],
-  ["Channel specs matched", "Passed"],
-  ["No auto-publish", "Locked"]
+  ["Brand Context", "Loaded"],
+  ["Claims Review", "Needs Legal"],
+  ["Human Approval", "Required"],
+  ["Handoff Packet", "Drafting"],
+  ["Auto-Publish", "Locked"]
+];
+
+const matrix = [
+  ["A01", "Problem hook", "Paid Social", "Needs QA"],
+  ["B04", "Proof-led angle", "CRM", "Review"],
+  ["C02", "Creator prompt", "Creator", "Direction set"],
+  ["D09", "Offer frame", "Programmatic", "Ready"]
 ];
 
 export function PrototypeConsole() {
@@ -19,46 +26,61 @@ export function PrototypeConsole() {
     <div className="console" aria-label="Campaign Variant Console static prototype">
       <div className="console-topbar">
         <div>
-          <span className="console-label">Candidate prototype</span>
+          <span className="console-label">Role-inspired prototype</span>
           <h3>Campaign Variant Console</h3>
         </div>
         <div className="status-pill">Human approval required</div>
       </div>
 
       <div className="console-grid">
-        <section className="console-panel span-2" aria-labelledby="brief-summary">
+        <section className="console-panel console-brief span-2" aria-labelledby="brief-summary">
           <div className="panel-heading">
-            <h4 id="brief-summary">Brief Summary</h4>
-            <span>Parsed</span>
+            <h4 id="brief-summary">Campaign Brief Parsed</h4>
+            <span>Source checked</span>
           </div>
           <p>
-            Launch a high-velocity test matrix for a performance creative campaign. Generate
-            channel-native variants while preserving approved voice, source context, and handoff
-            documentation.
+            Performance campaign system for generating channel-native variants with approved
+            context, QA status, and handoff notes.
           </p>
           <div className="brief-tags">
-            <span>Audience: growth-minded teams</span>
-            <span>Goal: faster variant production</span>
-            <span>Risk: unsupported claims</span>
+            <span>Goal: Variant velocity</span>
+            <span>Audience: Growth teams</span>
+            <span>Risk: Unsupported claims</span>
+            <span>No auto-publish</span>
           </div>
         </section>
 
         <section className="console-panel" aria-labelledby="brand-rules">
           <div className="panel-heading">
-            <h4 id="brand-rules">Brand Rules Loaded</h4>
+            <h4 id="brand-rules">Brand Context Loaded</h4>
             <span>7 rules</span>
           </div>
           <ul className="rule-list">
-            <li>Direct, useful, never breathless</li>
-            <li>No unsupported performance claims</li>
-            <li>Preserve campaign terminology</li>
-            <li>Keep CTA hierarchy consistent</li>
+            <li>Direct voice, no hype</li>
+            <li>Approved claims only</li>
+            <li>Campaign terms locked</li>
+            <li>CTA hierarchy preserved</li>
+          </ul>
+        </section>
+
+        <section className="console-panel" aria-labelledby="qa-gates">
+          <div className="panel-heading">
+            <h4 id="qa-gates">QA Gates</h4>
+            <span>5 active</span>
+          </div>
+          <ul className="qa-list">
+            {qaItems.map(([item, status]) => (
+              <li key={item}>
+                <span>{item}</span>
+                <strong>{status}</strong>
+              </li>
+            ))}
           </ul>
         </section>
 
         <section className="console-panel span-2" aria-labelledby="channel-outputs">
           <div className="panel-heading">
-            <h4 id="channel-outputs">Channel Outputs</h4>
+            <h4 id="channel-outputs">Channel Output Queue</h4>
             <span>66 variants</span>
           </div>
           <div className="channel-grid">
@@ -72,63 +94,40 @@ export function PrototypeConsole() {
           </div>
         </section>
 
-        <section className="console-panel" aria-labelledby="variant-queue">
+        <section className="console-panel span-2" aria-labelledby="variant-matrix">
           <div className="panel-heading">
-            <h4 id="variant-queue">Variant Queue</h4>
-            <span>Active</span>
+            <h4 id="variant-matrix">Variant Matrix</h4>
+            <span>Live queue</span>
           </div>
-          <ol className="queue-list">
-            <li>
-              <span>A01</span>
-              <p>Problem-framing hook set</p>
-            </li>
-            <li>
-              <span>B04</span>
-              <p>Proof-led conversion angle</p>
-            </li>
-            <li>
-              <span>C02</span>
-              <p>Creator prompt direction</p>
-            </li>
-          </ol>
-        </section>
-
-        <section className="console-panel" aria-labelledby="qa-checklist">
-          <div className="panel-heading">
-            <h4 id="qa-checklist">QA Checklist</h4>
-            <span>5 gates</span>
-          </div>
-          <ul className="qa-list">
-            {qaItems.map(([item, status]) => (
-              <li key={item}>
-                <span>{item}</span>
-                <strong>{status}</strong>
-              </li>
+          <div className="matrix-table" role="table" aria-label="Variant matrix">
+            {matrix.map(([id, angle, channel, status]) => (
+              <div className="matrix-row" role="row" key={id}>
+                <span role="cell">{id}</span>
+                <strong role="cell">{angle}</strong>
+                <em role="cell">{channel}</em>
+                <b role="cell">{status}</b>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         <section className="console-panel" aria-labelledby="handoff-status">
           <div className="panel-heading">
-            <h4 id="handoff-status">Handoff Status</h4>
-            <span>Draft</span>
+            <h4 id="handoff-status">Handoff Readiness</h4>
+            <span>Drafting</span>
           </div>
           <div className="handoff-meter" aria-label="Handoff readiness 72 percent">
             <span />
           </div>
-          <p>72% ready. Waiting on claims review and final creative approval before packaging.</p>
+          <p>72% ready. Claims review and final creative approval remain open.</p>
         </section>
 
-        <section className="console-panel span-2" aria-labelledby="documentation-notes">
+        <section className="console-panel" aria-labelledby="documentation-notes">
           <div className="panel-heading">
-            <h4 id="documentation-notes">Documentation Notes</h4>
+            <h4 id="documentation-notes">Documentation Trail</h4>
             <span>Auto-drafted</span>
           </div>
-          <p>
-            Include prompt version, context sources, selected variants, rejected directions,
-            approval owner, legal notes, and production specs. No output moves forward without a
-            documented human review trail.
-          </p>
+          <p>Prompt v03, context source, QA status, owner, and production notes attached.</p>
         </section>
       </div>
     </div>

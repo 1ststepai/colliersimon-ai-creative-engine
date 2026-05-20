@@ -10,6 +10,8 @@ This is not client work, not an official Collier.Simon project, and not affiliat
 
 The site demonstrates a practical operating model for turning creative briefs into repeatable, QA-ready AI production workflows. It combines an editorial concept-board feel with an internal production tool mockup called the Campaign Variant Console.
 
+Design pass updated to emphasize the prototype interface, reduce text density, improve visual hierarchy, and make the artifact feel closer to a premium creative technology concept presentation.
+
 The prototype is intentionally static and demo-safe:
 
 - No backend

@@ -1,38 +1,38 @@
 const stages = [
   {
     title: "Brief Intake",
-    inputs: "Campaign objective, audience, offer, channels, timing",
-    ai: "Extracts requirements, unknowns, mandatories, and testable angles",
-    human: "Confirms strategy, audience nuance, and creative ambition",
-    output: "Structured creative brief with risks and open questions"
+    input: "Objective, audience, channels",
+    ai: "Finds asks and gaps",
+    human: "Sets strategy",
+    output: "Structured brief"
   },
   {
-    title: "Context System",
-    inputs: "Brand rules, prior work, voice notes, channel specs",
-    ai: "Organizes reusable context packs and flags missing source material",
-    human: "Approves what becomes source-of-truth context",
-    output: "Brand and campaign context pack"
+    title: "Brand Context",
+    input: "Voice, claims, examples",
+    ai: "Builds context pack",
+    human: "Approves source truth",
+    output: "Reusable rules"
   },
   {
-    title: "AI Production Layer",
-    inputs: "Approved brief, context pack, prompt patterns, channel templates",
-    ai: "Generates variant directions, copy matrices, and asset prompts",
-    human: "Selects directions worth developing",
-    output: "Channel-specific creative variant queue"
+    title: "Variant Production",
+    input: "Brief, context, templates",
+    ai: "Generates matrix",
+    human: "Selects directions",
+    output: "Channel variants"
   },
   {
     title: "Human QA",
-    inputs: "Variants, brand rules, compliance notes, channel constraints",
-    ai: "Checks consistency, claims, formatting, and missing rationale",
-    human: "Reviews taste, strategy, accuracy, and final creative fit",
-    output: "Approved variants with QA status"
+    input: "Drafts and rules",
+    ai: "Flags risks",
+    human: "Reviews taste and claims",
+    output: "Approved queue"
   },
   {
     title: "Production Handoff",
-    inputs: "Approved variants, notes, specs, owners, next steps",
-    ai: "Packages documentation and handoff summaries",
-    human: "Confirms production readiness and ownership",
-    output: "Production-ready handoff packet"
+    input: "Approved variants",
+    ai: "Packages notes",
+    human: "Confirms readiness",
+    output: "Handoff packet"
   }
 ];
 
@@ -45,11 +45,11 @@ export function Pipeline() {
           <h3>{stage.title}</h3>
           <dl>
             <div>
-              <dt>Inputs</dt>
-              <dd>{stage.inputs}</dd>
+              <dt>Input</dt>
+              <dd>{stage.input}</dd>
             </div>
             <div>
-              <dt>What AI helps with</dt>
+              <dt>AI assist</dt>
               <dd>{stage.ai}</dd>
             </div>
             <div>
