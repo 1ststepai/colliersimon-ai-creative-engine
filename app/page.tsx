@@ -3,6 +3,7 @@ import { ModuleCards } from "@/components/ModuleCards";
 import { Pipeline } from "@/components/Pipeline";
 import { PrototypeConsole } from "@/components/PrototypeConsole";
 import { Section } from "@/components/Section";
+import Image from "next/image";
 
 const whyCards = [
   {
@@ -174,19 +175,36 @@ export default function Home() {
         title="Why I'm a fit for this kind of work"
         intro="At 1stStep.ai, I build the connective tissue between AI tools and real operating workflows: prompts, context, scripts, APIs, internal tools, documentation, and handoff systems."
       >
-        <div className="proof-grid">
-          {[
-            "Built AI workflow systems and internal tools",
-            "Created LLM-connected workflows using prompts, context, scripts, and APIs",
-            "Designed documented handoff processes for non-technical users",
-            "Translated messy business needs into structured systems",
-            "Prioritized useful AI over AI theater"
-          ].map((item) => (
-            <div className="proof-item" key={item}>
-              <span aria-hidden="true" />
-              <p>{item}</p>
+        <div className="why-me-layout">
+          <aside className="portrait-card" aria-label="Evan Pancis profile">
+            <Image
+              src="/evan-pancis-selfie.png"
+              alt="Evan Pancis, Creative Technologist and AI Workflow Builder"
+              width={752}
+              height={862}
+              sizes="(max-width: 1100px) 100vw, 360px"
+            />
+            <div>
+              <span>Candidate profile</span>
+              <strong>Evan Pancis</strong>
+              <p>Creative Technologist / AI Workflow Builder</p>
             </div>
-          ))}
+          </aside>
+
+          <div className="proof-grid">
+            {[
+              "Built AI workflow systems and internal tools",
+              "Created LLM-connected workflows using prompts, context, scripts, and APIs",
+              "Designed documented handoff processes for non-technical users",
+              "Translated messy business needs into structured systems",
+              "Prioritized useful AI over AI theater"
+            ].map((item) => (
+              <div className="proof-item" key={item}>
+                <span aria-hidden="true" />
+                <p>{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <p className="closing-statement">
           I do not see AI as a replacement for creative judgment. I see it as infrastructure for
