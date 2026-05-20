@@ -1,24 +1,24 @@
 const modules = [
   {
     title: "Brief-to-Variant Generator",
-    problem: "Teams need more campaign angles without losing the original strategy.",
-    build: "Parse briefs into channel templates and structured generation inputs.",
-    output: "A variant matrix with copy, angle, audience, risk, and rationale.",
-    impact: "Cuts blank-page time and makes testing directions easier to compare."
+    problem: "Creative teams need more angles without losing the original strategy.",
+    workflow: "Parse brief inputs into channel templates, generate structured variant sets, and tag each output by angle, audience, and risk.",
+    output: "A reviewable matrix of copy, visual direction, prompt notes, and rationale.",
+    time: "Reduces blank-page time and makes testing directions easier to compare."
   },
   {
     title: "Brand Context Pack Builder",
-    problem: "AI output drifts when source material is scattered or implied.",
-    build: "Convert voice, claims, examples, and do-not rules into reusable context.",
-    output: "A versioned context pack with source notes and missing-context flags.",
-    impact: "Improves consistency across makers, channels, and review cycles."
+    problem: "AI output drifts when teams rely on scattered source material.",
+    workflow: "Collect approved voice rules, examples, claims, forbidden language, channel specs, and campaign-specific context into a reusable pack.",
+    output: "A source-controlled context bundle with version notes and missing-context flags.",
+    time: "Cuts repeated setup work and improves consistency across makers and channels."
   },
   {
     title: "Creative QA + Handoff Checklist",
     problem: "Fast production creates risk when approval criteria live in someone's head.",
-    build: "Score variants against brand, claims, format, accessibility, and handoff needs.",
-    output: "A review trail with owners, unresolved risks, and production notes.",
-    impact: "Surfaces issues before assets reach paid media or production teams."
+    workflow: "Run each variant through brand, claims, format, accessibility, and handoff checks before final packaging.",
+    output: "A documented approval trail with owners, unresolved risks, and production notes.",
+    time: "Speeds review by making issues visible before assets reach production."
   }
 ];
 
@@ -27,7 +27,6 @@ export function ModuleCards() {
     <div className="module-grid">
       {modules.map((module) => (
         <article className="module-card" key={module.title}>
-          <div className="module-kicker">Roadmap module</div>
           <h3>{module.title}</h3>
           <dl>
             <div>
@@ -35,16 +34,16 @@ export function ModuleCards() {
               <dd>{module.problem}</dd>
             </div>
             <div>
-              <dt>Build</dt>
-              <dd>{module.build}</dd>
+              <dt>Workflow</dt>
+              <dd>{module.workflow}</dd>
             </div>
             <div>
               <dt>Output</dt>
               <dd>{module.output}</dd>
             </div>
             <div>
-              <dt>Impact</dt>
-              <dd>{module.impact}</dd>
+              <dt>Why it saves time</dt>
+              <dd>{module.time}</dd>
             </div>
           </dl>
         </article>

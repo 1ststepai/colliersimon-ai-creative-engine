@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const channels = [
   { name: "Paid Social", count: 18, status: "Needs QA" },
   { name: "CTV", count: 6, status: "Script pass" },
@@ -6,81 +10,105 @@ const channels = [
   { name: "Creator Studio", count: 8, status: "Direction set" }
 ];
 
-const qaItems = [
-  ["Brand Context", "Loaded"],
-  ["Claims Review", "Needs Legal"],
-  ["Human Approval", "Required"],
-  ["Handoff Packet", "Drafting"],
-  ["Auto-Publish", "Locked"]
+type QaStatus = "Ready" | "Needs review" | "Locked" | "Complete";
+
+type QaItem = {
+  label: string;
+  status: QaStatus;
+  clearable: boolean;
+};
+
+const initialQaItems: QaItem[] = [
+  { label: "Brand voice lock", status: "Ready", clearable: false },
+  { label: "Source context present", status: "Ready", clearable: false },
+  { label: "Claims reviewed", status: "Needs review", clearable: true },
+  { label: "Channel specs matched", status: "Ready", clearable: false },
+  { label: "No auto-publish", status: "Locked", clearable: false }
 ];
 
-const matrix = [
-  ["A01", "Problem hook", "Paid Social", "Needs QA"],
-  ["B04", "Proof-led angle", "CRM", "Review"],
-  ["C02", "Creator prompt", "Creator", "Direction set"],
-  ["D09", "Offer frame", "Programmatic", "Ready"]
-];
+function getStatusClass(status: QaStatus) {
+  if (status === "Ready") {
+    return "qa-status-passed";
+  }
+
+  if (status === "Complete") {
+    return "qa-status-cleared";
+  }
+
+  if (status === "Needs review") {
+    return "qa-status-needs";
+  }
+
+  return "qa-status-locked";
+}
 
 export function PrototypeConsole() {
+  const [qaItems, setQaItems] = useState(initialQaItems);
+  const hasCompletedClaimsReview = qaItems.some(
+    (item) => item.label === "Claims reviewed" && item.status === "Complete"
+  );
+  const handoffPercent = hasCompletedClaimsReview ? "88%" : "72%";
+  const handoffText = hasCompletedClaimsReview
+    ? "88% ready. Awaiting final creative approval."
+    : "72% ready. Waiting on claims review and final creative approval before packaging.";
+
+  function toggleQaItem(label: string) {
+    setQaItems((items) =>
+      items.map((item) =>
+        item.label === label && item.clearable
+          ? { ...item, status: item.status === "Needs review" ? "Complete" : "Needs review" }
+          : item
+      )
+    );
+  }
+
   return (
     <div className="console" aria-label="Campaign Variant Console static prototype">
       <div className="console-topbar">
         <div>
-          <span className="console-label">Role-inspired prototype</span>
+          <span className="console-label">Candidate prototype</span>
           <h3>Campaign Variant Console</h3>
+          <p className="console-note">
+            Demo interaction: mark a QA checkpoint complete to see handoff readiness update.
+          </p>
         </div>
         <div className="status-pill">Human approval required</div>
       </div>
 
       <div className="console-grid">
-        <section className="console-panel console-brief span-2" aria-labelledby="brief-summary">
+        <section className="console-panel span-2" aria-labelledby="brief-summary">
           <div className="panel-heading">
-            <h4 id="brief-summary">Campaign Brief Parsed</h4>
-            <span>Source checked</span>
+            <h4 id="brief-summary">Brief Summary</h4>
+            <span>Parsed</span>
           </div>
           <p>
-            Performance campaign system for generating channel-native variants with approved
-            context, QA status, and handoff notes.
+            Launch a high-velocity test matrix for a performance creative campaign. Generate
+            channel-native variants while preserving approved voice, source context, and handoff
+            documentation.
           </p>
           <div className="brief-tags">
-            <span>Goal: Variant velocity</span>
-            <span>Audience: Growth teams</span>
-            <span>Risk: Unsupported claims</span>
-            <span>No auto-publish</span>
+            <span>Audience: growth-minded teams</span>
+            <span>Goal: faster variant production</span>
+            <span>Risk: unsupported claims</span>
           </div>
         </section>
 
         <section className="console-panel" aria-labelledby="brand-rules">
           <div className="panel-heading">
-            <h4 id="brand-rules">Brand Context Loaded</h4>
+            <h4 id="brand-rules">Brand Rules Loaded</h4>
             <span>7 rules</span>
           </div>
           <ul className="rule-list">
-            <li>Direct voice, no hype</li>
-            <li>Approved claims only</li>
-            <li>Campaign terms locked</li>
-            <li>CTA hierarchy preserved</li>
+            <li>Direct, useful, never breathless</li>
+            <li>No unsupported performance claims</li>
+            <li>Preserve campaign terminology</li>
+            <li>Keep CTA hierarchy consistent</li>
           </ul>
         </section>
 
-        <section className="console-panel" aria-labelledby="qa-gates">
+        <section className="console-panel span-4" aria-labelledby="channel-outputs">
           <div className="panel-heading">
-            <h4 id="qa-gates">QA Gates</h4>
-            <span>5 active</span>
-          </div>
-          <ul className="qa-list">
-            {qaItems.map(([item, status]) => (
-              <li key={item}>
-                <span>{item}</span>
-                <strong>{status}</strong>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="console-panel span-2" aria-labelledby="channel-outputs">
-          <div className="panel-heading">
-            <h4 id="channel-outputs">Channel Output Queue</h4>
+            <h4 id="channel-outputs">Channel Outputs</h4>
             <span>66 variants</span>
           </div>
           <div className="channel-grid">
@@ -94,40 +122,107 @@ export function PrototypeConsole() {
           </div>
         </section>
 
-        <section className="console-panel span-2" aria-labelledby="variant-matrix">
+        <section className="console-panel" aria-labelledby="variant-queue">
           <div className="panel-heading">
-            <h4 id="variant-matrix">Variant Matrix</h4>
-            <span>Live queue</span>
+            <h4 id="variant-queue">Variant Queue</h4>
+            <span>Active</span>
           </div>
-          <div className="matrix-table" role="table" aria-label="Variant matrix">
-            {matrix.map(([id, angle, channel, status]) => (
-              <div className="matrix-row" role="row" key={id}>
-                <span role="cell">{id}</span>
-                <strong role="cell">{angle}</strong>
-                <em role="cell">{channel}</em>
-                <b role="cell">{status}</b>
-              </div>
+          <ol className="queue-list">
+            <li>
+              <span>A01</span>
+              <p>Problem-framing hook set</p>
+            </li>
+            <li>
+              <span>B04</span>
+              <p>Proof-led conversion angle</p>
+            </li>
+            <li>
+              <span>C02</span>
+              <p>Creator prompt direction</p>
+            </li>
+          </ol>
+        </section>
+
+        <section className="console-panel" aria-labelledby="qa-checklist">
+          <div className="panel-heading">
+            <h4 id="qa-checklist">QA Checklist</h4>
+            <span>
+              5 gates
+              <small className="qa-hint">Click to mark claims review complete</small>
+            </span>
+          </div>
+          <ul className="qa-list">
+            {qaItems.map((item) => (
+              <li key={item.label}>
+                <span>{item.label}</span>
+                {item.clearable ? (
+                  <button
+                    type="button"
+                    className={`qa-status-button ${getStatusClass(item.status)}`}
+                    aria-pressed={item.status === "Complete"}
+                    aria-label={
+                      item.status === "Complete"
+                        ? "Claims review complete"
+                        : "Click to mark claims review complete"
+                    }
+                    onClick={() => toggleQaItem(item.label)}
+                  >
+                    {item.status === "Complete" ? "Claims review complete" : item.status}
+                  </button>
+                ) : (
+                  <strong className={getStatusClass(item.status)}>{item.status}</strong>
+                )}
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         <section className="console-panel" aria-labelledby="handoff-status">
           <div className="panel-heading">
-            <h4 id="handoff-status">Handoff Readiness</h4>
-            <span>Drafting</span>
+            <h4 id="handoff-status">Handoff Status</h4>
+            <span>Draft</span>
           </div>
-          <div className="handoff-meter" aria-label="Handoff readiness 72 percent">
-            <span />
+          <div className="handoff-meter" aria-label={`Handoff readiness ${handoffPercent}`}>
+            <span style={{ width: handoffPercent }} />
           </div>
-          <p>72% ready. Claims review and final creative approval remain open.</p>
+          <p>{handoffText}</p>
         </section>
 
-        <section className="console-panel" aria-labelledby="documentation-notes">
+        <section className="console-panel span-2" aria-labelledby="documentation-notes">
           <div className="panel-heading">
-            <h4 id="documentation-notes">Documentation Trail</h4>
+            <h4 id="documentation-notes">Documentation Notes</h4>
             <span>Auto-drafted</span>
           </div>
-          <p>Prompt v03, context source, QA status, owner, and production notes attached.</p>
+          <p>
+            Include prompt version, context sources, selected variants, rejected directions,
+            approval owner, legal notes, and production specs. No output moves forward without a
+            documented human review trail.
+          </p>
+        </section>
+
+        <section className="console-panel span-2" aria-labelledby="variant-preview">
+          <div className="panel-heading">
+            <h4 id="variant-preview">Variant Preview</h4>
+            <span>A01 - Paid Social</span>
+          </div>
+          <p>Problem-framing hook / Growth audience / No flagged claims</p>
+          <ul className="variant-list">
+            <li>
+              <span>V1</span>
+              <p>{"You're generating more content than ever. You're not getting more results. Here's why."}</p>
+            </li>
+            <li>
+              <span>V2</span>
+              <p>Most AI tools make more content. This one makes fewer wrong decisions.</p>
+            </li>
+            <li>
+              <span>V3</span>
+              <p>Brief in. Variant matrix out. Brand rules, QA gates, and handoff documentation included.</p>
+            </li>
+          </ul>
+          <p className="variant-prompt-meta">
+            Prompt v03 / Context: brand rules + campaign brief / Human selection required
+          </p>
         </section>
       </div>
     </div>
